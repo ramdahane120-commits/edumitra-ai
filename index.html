@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduMitra AI — Rajasthan AI Student Assistance & Admissions Platform</title>
+  <meta name="description" content="EduMitra AI is a centralized, multilingual AI-powered admission guidance platform for Rajasthan engineering (REAP) and polytechnic colleges using verified educational data." />
+  <meta name="keywords" content="EduMitra AI, REAP 2026, Rajasthan Engineering Colleges, Polytechnic Rajasthan, Cutoff Explorer, RTU Kota, MBM Jodhpur, MNIT Jaipur" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <nav class="navbar" id="mainNavbar">
+    <div class="logo-container">
+      <div class="logo-icon">E</div>
+      <div class="logo-text">
+        <h1>EduMitra AI</h1>
+        <p>SIH 2026 • RAJASTHAN ADMISSIONS PLATFORM</p>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs">
+      <button class="nav-btn active" data-view="chatbot" id="navChatbot">
+        <span>🤖</span> Ask AI
+      </button>
+      <button class="nav-btn" data-view="explorer" id="navExplorer">
+        <span>🎓</span> Colleges
+      </button>
+      <button class="nav-btn" data-view="comparison" id="navComparison">
+        <span>📊</span> Compare
+      </button>
+      <button class="nav-btn" data-view="cutoffs" id="navCutoffs">
+        <span>📈</span> Cutoffs
+      </button>
+      <button class="nav-btn" data-view="eligibility" id="navEligibility">
+        <span>✅</span> Eligibility
+      </button>
+      <button class="nav-btn" data-view="scholarships" id="navScholarships">
+        <span>💰</span> Scholarships
+      </button>
+      <button class="nav-btn" data-view="roadmap" id="navRoadmap">
+        <span>🧭</span> Roadmap
+      </button>
+    </div>
+
+    <!-- Language Selector Controls -->
+    <div class="header-controls">
+      <select id="langSelector" class="lang-selector" aria-label="Select Language">
+        <option value="en">🌐 English</option>
+        <option value="hi">🇮🇳 हिंदी (Hindi)</option>
+        <option value="raj">🚩 राजस्थानी (Rajasthani)</option>
+      </select>
+    </div>
+  </nav>
+
+  <!-- Main Content Container -->
+  <main class="app-container">
+
+    <!-- Hero Banner -->
+    <header class="hero-banner">
+      <h1 class="hero-title">Rajasthan Student AI Admission Assistance</h1>
+      <p class="hero-subtitle">
+        Empowering Rajasthan engineering (REAP) & polytechnic diploma aspirants with verified educational data, AI-grounded guidance, cutoff trends, and scholarship matchers.
+      </p>
+      <div class="quick-stats-row">
+        <div class="stat-chip">
+          <span>🏛 Verified Institutions:</span> <strong>18+ Govt & Top Private</strong>
+        </div>
+        <div class="stat-chip">
+          <span>📊 REAP Cutoff Range:</span> <strong>2023 - 2025 Historical Data</strong>
+        </div>
+        <div class="stat-chip">
+          <span>💰 Verified Scholarships:</span> <strong>SJE, CM & NSP Schemes</strong>
+        </div>
+        <div class="stat-chip">
+          <span>🛡 RAG Anti-Hallucination:</span> <strong>100% Grounded Citations</strong>
+        </div>
+      </div>
+    </header>
+
+    <!-- View 1: AI RAG Chatbot -->
+    <section id="chatbotView" class="view-section active">
+      <div id="chatbotViewContainer"></div>
+    </section>
+
+    <!-- View 2: College Explorer -->
+    <section id="explorerView" class="view-section">
+      <div id="explorerViewContainer"></div>
+    </section>
+
+    <!-- View 3: Side-by-Side Comparison -->
+    <section id="comparisonView" class="view-section">
+      <div id="comparisonViewContainer"></div>
+    </section>
+
+    <!-- View 4: REAP & Diploma Cutoff Explorer -->
+    <section id="cutoffsView" class="view-section">
+      <div id="cutoffsViewContainer"></div>
+    </section>
+
+    <!-- View 5: Instant Eligibility Checker -->
+    <section id="eligibilityView" class="view-section">
+      <div id="eligibilityViewContainer"></div>
+    </section>
+
+    <!-- View 6: Scholarship Finder -->
+    <section id="scholarshipsView" class="view-section">
+      <div id="scholarshipsViewContainer"></div>
+    </section>
+
+    <!-- View 7: Personalized Admission Roadmap -->
+    <section id="roadmapView" class="view-section">
+      <div id="roadmapViewContainer"></div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer style="border-top:1px solid var(--border-glass); padding:2rem; margin-top:3rem; text-align:center; color:var(--text-muted); font-size:0.85rem;">
+    <p>EduMitra AI — Smart India Hackathon (SIH) Development Solution for Rajasthan Student Assistance.</p>
+    <p style="margin-top:0.4rem; color:var(--text-dim);">Grounded in official REAP, DTE Rajasthan & Technical Education Portal Datasets.</p>
+  </footer>
+
+  <!-- Application Logic ES Module -->
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
