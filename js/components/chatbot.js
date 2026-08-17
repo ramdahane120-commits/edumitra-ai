@@ -1,10 +1,13 @@
 // EduMitra AI - Interactive RAG Chatbot UI Component
 
 import { processUserQuery } from '../services/aiEngine.js';
+import { TRANSLATIONS } from '../services/i18n.js';
 
 export function initChatbotComponent(containerId, currentLang = 'en') {
   const container = document.getElementById(containerId);
   if (!container) return;
+
+  const t = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
 
   container.innerHTML = `
     <div class="chat-layout">
@@ -17,14 +20,13 @@ export function initChatbotComponent(containerId, currentLang = 'en') {
               <p style="font-size:0.75rem; color:var(--accent-green);">● Verified Rajasthan Education Data grounded RAG</p>
             </div>
           </div>
-          <button id="clearChatBtn" class="btn-secondary" style="padding:0.4rem 0.8rem; font-size:0.8rem;">Clear Chat</button>
+          <button id="clearChatBtn" class="btn-secondary" style="padding:0.4rem 0.8rem; font-size:0.8rem;">${t.clearChat}</button>
         </div>
 
         <div class="chat-messages" id="chatMessages">
           <div class="message-bubble assistant">
-            👋 <strong>Khammaghani! / Welcome to EduMitra AI</strong><br/>
-            I am your dedicated AI assistant for Rajasthan Engineering (REAP) & Polytechnic Admissions.<br/><br/>
-            How can I help you today? You can ask me:
+            <strong>${t.welcomeTitle}</strong><br/>
+            ${t.welcomeDesc}<br/><br/>
             <ul style="margin-left:1.2rem; margin-top:0.4rem; font-size:0.85rem; color:var(--text-muted);">
               <li>"I scored 82% in 12th PCM. Which government CSE colleges can I get?"</li>
               <li>"Compare RTU Kota vs SKIT Jaipur"</li>
@@ -36,15 +38,15 @@ export function initChatbotComponent(containerId, currentLang = 'en') {
 
         <div class="chat-input-area">
           <div class="prompt-chips">
-            <button class="chip-btn" data-query="I scored 82% in 12th PCM. Which government colleges can I get for CSE?">🎓 Govt CSE for 82% Marks</button>
-            <button class="chip-btn" data-query="Compare RTU Kota vs SKIT Jaipur">📊 Compare RTU Kota & SKIT</button>
-            <button class="chip-btn" data-query="What scholarships can I get for engineering in Rajasthan?">💰 Rajasthan Scholarships</button>
-            <button class="chip-btn" data-query="Show me top polytechnic diploma colleges in Jaipur">🏫 Govt Polytechnic Jaipur</button>
+            <button class="chip-btn" data-query="I scored 82% in 12th PCM. Which government colleges can I get for CSE?">${t.chip1}</button>
+            <button class="chip-btn" data-query="Compare RTU Kota vs SKIT Jaipur">${t.chip2}</button>
+            <button class="chip-btn" data-query="What scholarships can I get for engineering in Rajasthan?">${t.chip3}</button>
+            <button class="chip-btn" data-query="Show me top polytechnic diploma colleges in Jaipur">${t.chip4}</button>
           </div>
           <form class="chat-form" id="chatForm" style="margin-top:0.75rem;">
-            <input type="text" id="chatInput" class="chat-input" placeholder="Ask about Rajasthan colleges, fees, cutoffs, scholarships..." autocomplete="off" required />
+            <input type="text" id="chatInput" class="chat-input" placeholder="${t.inputPlaceholder}" autocomplete="off" required />
             <button type="submit" class="send-btn">
-              <span>Send</span> ➔
+              <span>${t.sendBtn}</span>
             </button>
           </form>
         </div>
@@ -55,16 +57,16 @@ export function initChatbotComponent(containerId, currentLang = 'en') {
         <h4 style="font-family:var(--font-heading); font-size:1.1rem; color:#fff; margin-bottom:1rem;">⚡ Quick Assistant Tools</h4>
         <div style="display:flex; flex-direction:column; gap:0.75rem; font-size:0.88rem;">
           <div style="background:rgba(15,23,42,0.6); padding:0.8rem; border-radius:var(--radius-md); border:1px solid var(--border-glass);">
-            <div style="color:var(--accent-cyan); font-weight:600; margin-bottom:0.2rem;">🏛 Verified Sources</div>
-            <div style="color:var(--text-muted); font-size:0.8rem;">Grounded on official REAP 2025 seat matrix, DTE Rajasthan brochures & college reports.</div>
+            <div style="color:var(--accent-cyan); font-weight:600; margin-bottom:0.2rem;">${t.verifiedSourcesTitle}</div>
+            <div style="color:var(--text-muted); font-size:0.8rem;">${t.verifiedSourcesDesc}</div>
           </div>
           <div style="background:rgba(15,23,42,0.6); padding:0.8rem; border-radius:var(--radius-md); border:1px solid var(--border-glass);">
-            <div style="color:var(--accent-amber); font-weight:600; margin-bottom:0.2rem;">🛡 Anti-Hallucination</div>
-            <div style="color:var(--text-muted); font-size:0.8rem;">Every recommendation includes verified document citations & fees.</div>
+            <div style="color:var(--accent-amber); font-weight:600; margin-bottom:0.2rem;">${t.antiHallucinationTitle}</div>
+            <div style="color:var(--text-muted); font-size:0.8rem;">${t.antiHallucinationDesc}</div>
           </div>
           <div style="background:rgba(15,23,42,0.6); padding:0.8rem; border-radius:var(--radius-md); border:1px solid var(--border-glass);">
-            <div style="color:var(--accent-green); font-weight:600; margin-bottom:0.2rem;">🌐 Multilingual Engine</div>
-            <div style="color:var(--text-muted); font-size:0.8rem;">Supports English, Hindi (हिंदी) & Rajasthani (राजस्थानी).</div>
+            <div style="color:var(--accent-green); font-weight:600; margin-bottom:0.2rem;">${t.multilingualTitle}</div>
+            <div style="color:var(--text-muted); font-size:0.8rem;">${t.multilingualDesc}</div>
           </div>
         </div>
       </div>
@@ -80,7 +82,7 @@ export function initChatbotComponent(containerId, currentLang = 'en') {
   clearChatBtn.addEventListener('click', () => {
     chatMessages.innerHTML = `
       <div class="message-bubble assistant">
-        Chat cleared. Ask me anything about Rajasthan colleges, cutoffs, or scholarships!
+        ${t.clearChat}. Ask me anything about Rajasthan colleges, cutoffs, or scholarships!
       </div>
     `;
   });
@@ -113,13 +115,13 @@ export function initChatbotComponent(containerId, currentLang = 'en') {
               <div style="background:rgba(15,23,42,0.8); border:1px solid var(--border-glass); border-radius:var(--radius-md); padding:0.8rem;">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                   <strong style="color:#60a5fa; font-size:0.95rem;">${col.name} (${col.shortName})</strong>
-                  <span class="badge-tag ${col.type.includes('Government') ? 'badge-govt' : 'badge-private'}">${col.type}</span>
+                  <span class="badge-tag ${col.type.includes('Government') ? 'badge-govt' : 'badge-private'}">${col.type.includes('Government') ? t.govtBadge : t.privateBadge}</span>
                 </div>
                 <div style="font-size:0.82rem; color:var(--text-muted); margin-top:0.3rem;">
-                  📍 ${col.district} | 💰 Fee: ₹${col.feesPerYear.toLocaleString()}/yr | 🏠 Hostel: ${col.hostelAvailable ? 'Available' : 'N/A'}
+                  📍 ${col.district} | 💰 ${t.tuitionFee}: ₹${col.feesPerYear.toLocaleString()}/yr | 🏠 ${t.hostelFee}: ${col.hostelAvailable ? '₹' + col.hostelFeesPerYear.toLocaleString() : 'N/A'}
                 </div>
                 <div style="font-size:0.82rem; color:var(--accent-green); margin-top:0.3rem;">
-                  💼 Placements: Avg ${col.placements.avgPackage} (Highest ${col.placements.highestPackage})
+                  💼 ${t.avgPackage}: ${col.placements.avgPackage} (${t.highestPackage}: ${col.placements.highestPackage})
                 </div>
               </div>
             `;
