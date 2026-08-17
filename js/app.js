@@ -49,8 +49,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (stat3) stat3.textContent = t.verifiedScholarships;
     if (stat4) stat4.textContent = t.ragAntiHallucination;
 
-    // 3. Re-init Chatbot view
+    // 3. Re-initialize ALL components with selected language
     initChatbotComponent('chatbotViewContainer', lang);
+    initCollegeExplorerComponent('explorerViewContainer', lang);
+    initComparisonComponent('comparisonViewContainer');
+    initCutoffExplorerComponent('cutoffsViewContainer');
+    initEligibilityCheckerComponent('eligibilityViewContainer');
+    initScholarshipFinderComponent('scholarshipsViewContainer');
+    initAdmissionRoadmapComponent('roadmapViewContainer');
   }
 
   // Language Selector Switcher
@@ -94,10 +100,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize page
   updatePageLanguage('en');
-  initCollegeExplorerComponent('explorerViewContainer');
-  initComparisonComponent('comparisonViewContainer');
-  initCutoffExplorerComponent('cutoffsViewContainer');
-  initEligibilityCheckerComponent('eligibilityViewContainer');
-  initScholarshipFinderComponent('scholarshipsViewContainer');
-  initAdmissionRoadmapComponent('roadmapViewContainer');
 });

@@ -1,30 +1,33 @@
 // EduMitra AI - College Explorer Component
 
 import { RAJASTHAN_COLLEGES } from '../data/colleges.js';
+import { TRANSLATIONS } from '../services/i18n.js';
 
-export function initCollegeExplorerComponent(containerId) {
+export function initCollegeExplorerComponent(containerId, currentLang = 'en') {
   const container = document.getElementById(containerId);
   if (!container) return;
+
+  const t = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
 
   container.innerHTML = `
     <div>
       <div style="margin-bottom:1.5rem;">
-        <h2 style="font-family:var(--font-heading); font-size:1.8rem; font-weight:700; color:#fff;">🎓 Rajasthan College Explorer</h2>
+        <h2 style="font-family:var(--font-heading); font-size:1.8rem; font-weight:700; color:#fff;">🎓 ${t.navExplorer} — Rajasthan</h2>
         <p style="color:var(--text-muted);">Explore and filter verified Engineering & Polytechnic institutions in Rajasthan.</p>
       </div>
 
       <!-- Filters Bar -->
       <div class="filters-bar">
         <div class="filter-group">
-          <label>Search College</label>
+          <label>Search College / खोजें</label>
           <input type="text" id="explorerSearch" class="filter-input" placeholder="Search by name, city, RTU..." />
         </div>
         <div class="filter-group">
-          <label>Institution Type</label>
+          <label>Institution Type / प्रकार</label>
           <select id="explorerType" class="filter-select">
             <option value="all">All Types (Govt & Private)</option>
-            <option value="government">Government Only</option>
-            <option value="private">Private Only</option>
+            <option value="government">${t.govtBadge} Only</option>
+            <option value="private">${t.privateBadge} Only</option>
           </select>
         </div>
         <div class="filter-group">
@@ -36,7 +39,7 @@ export function initCollegeExplorerComponent(containerId) {
           </select>
         </div>
         <div class="filter-group">
-          <label>District</label>
+          <label>District / जिला</label>
           <select id="explorerDistrict" class="filter-select">
             <option value="all">All Districts</option>
             <option value="Jaipur">Jaipur</option>
@@ -48,7 +51,7 @@ export function initCollegeExplorerComponent(containerId) {
           </select>
         </div>
         <div class="filter-group">
-          <label>Max Fee per Year</label>
+          <label>Max Fee per Year / अधिकतम फीस</label>
           <select id="explorerFee" class="filter-select">
             <option value="all">Any Fee Range</option>
             <option value="20000">Under ₹20,000 / yr (Polytechnic Govt)</option>
@@ -93,7 +96,7 @@ export function initCollegeExplorerComponent(containerId) {
     if (filtered.length === 0) {
       explorerGrid.innerHTML = `
         <div style="grid-column: 1 / -1; text-align:center; padding:3rem; color:var(--text-muted);" class="glass-card">
-          🚫 No colleges match your selected filters. Try broadening your criteria.
+          🚫 No colleges match your selected filters.
         </div>
       `;
       return;
@@ -107,7 +110,7 @@ export function initCollegeExplorerComponent(containerId) {
             <div style="font-size:0.8rem; color:var(--text-muted);">${col.name}</div>
           </div>
           <span class="badge-tag ${col.type.toLowerCase().includes('government') ? 'badge-govt' : 'badge-private'}">
-            ${col.type.toLowerCase().includes('government') ? 'Government' : 'Private'}
+            ${col.type.toLowerCase().includes('government') ? t.govtBadge : t.privateBadge}
           </span>
         </div>
 
@@ -117,36 +120,35 @@ export function initCollegeExplorerComponent(containerId) {
 
         <div class="college-specs">
           <div class="spec-item">
-            <span>Tuition Fee</span>
+            <span>${t.tuitionFee}</span>
             <strong>₹${col.feesPerYear.toLocaleString()} / yr</strong>
           </div>
           <div class="spec-item">
-            <span>Hostel Fee</span>
+            <span>${t.hostelFee}</span>
             <strong>${col.hostelAvailable ? `₹${col.hostelFeesPerYear.toLocaleString()} / yr` : 'N/A'}</strong>
           </div>
           <div class="spec-item">
-            <span>Avg Package</span>
+            <span>${t.avgPackage}</span>
             <strong>${col.placements.avgPackage}</strong>
           </div>
           <div class="spec-item">
-            <span>Highest Package</span>
+            <span>${t.highestPackage}</span>
             <strong>${col.placements.highestPackage}</strong>
           </div>
         </div>
 
         <div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.75rem;">
-          🎯 <strong>Popular Branches:</strong> ${col.courses.slice(0, 3).map(c => c.branch).join(', ')}
+          🎯 <strong>Branches:</strong> ${col.courses.slice(0, 3).map(c => c.branch).join(', ')}
         </div>
 
         <div class="card-actions">
-          <button class="btn-secondary" onclick="window.compareWithCollege('${col.id}')">📊 Add to Compare</button>
-          <a href="${col.website}" target="_blank" class="btn-secondary" style="text-decoration:none;">🌐 Official Website</a>
+          <button class="btn-secondary" onclick="window.compareWithCollege('${col.id}')">${t.addToCompare}</button>
+          <a href="${col.website}" target="_blank" class="btn-secondary" style="text-decoration:none;">${t.officialWebsite}</a>
         </div>
       </div>
     `).join('');
   }
 
-  // Event Listeners
   [searchInput, typeSelect, categorySelect, districtSelect, feeSelect].forEach(el => {
     el.addEventListener('input', renderColleges);
     el.addEventListener('change', renderColleges);
