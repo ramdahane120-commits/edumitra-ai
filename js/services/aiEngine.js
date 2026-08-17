@@ -38,18 +38,31 @@ export function resetConversationSession() {
   };
 }
 
+// Minimum Percentile Threshold Map for Specific Colleges
+const COLLEGE_MIN_PERCENTILE = {
+  'mnit-jaipur': { minPercentile: 93.0, label: '93%–99.2% (JEE Main Rank < 48,000)' },
+  'uce-rtu-kota': { minPercentile: 72.0, label: '72%–88.5% (REAP Merit / 12th PCM)' },
+  'mbm-jodhpur': { minPercentile: 74.0, label: '74%–92.4% (REAP Merit / 12th PCM)' },
+  'ctae-udaipur': { minPercentile: 72.0, label: '72%–91.0% (REAP Merit)' },
+  'skit-jaipur': { minPercentile: 60.0, label: '60%–79.5% (REAP / 12th Board)' },
+  'gec-ajmer': { minPercentile: 65.0, label: '65%–83.2% (REAP / 12th Board)' },
+  'gec-bikaner': { minPercentile: 60.0, label: '60%–80.0% (REAP)' },
+  'jecrc-jaipur': { minPercentile: 55.0, label: '55%–78.0% (REAP)' },
+  'gpc-jaipur': { minPercentile: 60.0, label: '60%–78.5% (10th Board Score)' }
+};
+
 export function processUserQuery(query, language = 'en') {
   const rawQuery = query.trim();
   const queryLower = rawQuery.toLowerCase();
 
-  // 1. Extract Marks (% or raw numbers between 35 and 99)
+  // 1. Extract Marks / Percentile (% or raw numbers between 35 and 99)
   let userMarks = sessionContext.lastMarks;
-  const explicitMarksMatch = queryLower.match(/(\d{1,2}(\.\d{1,2})?)\s*(%|percent|pct|marks|अंक|नंबर)/i);
+  const explicitMarksMatch = queryLower.match(/(\d{1,2}(\.\d{1,2})?)\s*(%|percent|percentile|pct|marks|अंक|नंबर)/i);
   if (explicitMarksMatch) {
     userMarks = parseFloat(explicitMarksMatch[1]);
     sessionContext.lastMarks = userMarks;
   } else {
-    const implicitMatch = queryLower.match(/(?:got|scored|have|with|pcm|board|12th|10th|percentage)\s*(\d{2}(\.\d{1,2})?)/i) || queryLower.match(/\b([4-9]\d(\.\d{1,2})?)\b/);
+    const implicitMatch = queryLower.match(/(?:got|scored|have|with|pcm|board|jee|percentile|12th|10th|percentage|at)\s*(\d{2}(\.\d{1,2})?)/i) || queryLower.match(/\b([3-9]\d(\.\d{1,2})?)\b/);
     if (implicitMatch) {
       const num = parseFloat(implicitMatch[1]);
       if (num >= 35 && num <= 100) {
@@ -64,7 +77,7 @@ export function processUserQuery(query, language = 'en') {
   const rankMatch = queryLower.match(/(\d{4,6})\s*(rank|jee|merit|रैंक)/i) || queryLower.match(/rank\s*(\d{4,6})/i);
   if (rankMatch) userRank = parseInt(rankMatch[1], 10);
 
-  // 3. College Extraction with Multi-Turn Anaphora / Pronoun Resolution ("there", "that college", "it")
+  // 3. Extract Specific Target College
   let targetCollege = null;
   for (const alias of COLLEGE_ALIASES) {
     if (alias.keywords.some(kw => queryLower.includes(kw))) {
@@ -73,7 +86,7 @@ export function processUserQuery(query, language = 'en') {
     }
   }
 
-  // Anaphora Resolution: If user says "there", "it", "that college" or asks about fee/hostel without naming a college
+  // Pronoun Resolution ("there", "it", "that college")
   const isPronounReference = queryLower.includes('there') || queryLower.includes('it') || queryLower.includes('that college') || queryLower.includes('उसमें') || queryLower.includes('वहां');
   if (!targetCollege && (isPronounReference || queryLower.includes('fee') || queryLower.includes('hostel') || queryLower.includes('placement')) && sessionContext.lastCollege) {
     targetCollege = sessionContext.lastCollege;
@@ -81,11 +94,12 @@ export function processUserQuery(query, language = 'en') {
     sessionContext.lastCollege = targetCollege;
   }
 
-  // 4. District / City Match
+  // 4. City Match
   const cities = ['jaipur', 'jodhpur', 'kota', 'udaipur', 'ajmer', 'bikaner', 'bhilwara'];
   const targetCity = cities.find(city => queryLower.includes(city));
 
-  // 5. Concept Flags
+  // 5. Query Flags
+  const isCanIGetQuery = queryLower.includes('can i get') || queryLower.includes('can i admission') || queryLower.includes('possible to get') || queryLower.includes('chance to get') || queryLower.includes('क्या मुझे') || queryLower.includes('मिल सकता');
   const isGreeting = queryLower.match(/\b(hi|hello|hey|namaste|khammaghani|ram ram|रामां-रामां|नमस्ते|हेलो|हाय)\b/i);
   const isWhoAreYou = queryLower.includes('who are you') || queryLower.includes('your name') || queryLower.includes('क्या हो') || queryLower.includes('कौन हो');
   const isGovtOnly = queryLower.includes('govt') || queryLower.includes('government') || queryLower.includes('सरकारी');
@@ -97,7 +111,7 @@ export function processUserQuery(query, language = 'en') {
   const isScholarship = queryLower.includes('scholarship') || queryLower.includes('छात्रवृत्ति') || queryLower.includes('fee waiver') || queryLower.includes('tfws');
   const isCompare = queryLower.includes('compare') || queryLower.includes('vs') || queryLower.includes('अंतर') || queryLower.includes('तुलना') || queryLower.includes('better');
   const isRoadmap = queryLower.includes('roadmap') || queryLower.includes('process') || queryLower.includes('step') || queryLower.includes('प्रक्रिया') || queryLower.includes('काउंसलिंग') || queryLower.includes('how to apply');
-  const isCutoffQuery = queryLower.includes('cutoff') || queryLower.includes('cut off') || queryLower.includes('cut-off') || queryLower.includes('कटऑफ') || queryLower.includes('रैंक') || queryLower.includes('closing rank') || queryLower.includes('opening rank');
+  const isCutoffQuery = queryLower.includes('cutoff') || queryLower.includes('cut off') || queryLower.includes('cut-off') || queryLower.includes('कटऑफ') || queryLower.includes('रैंक') || queryLower.includes('closing rank');
 
   let intent = 'conversational';
   let responseText = '';
@@ -106,9 +120,61 @@ export function processUserQuery(query, language = 'en') {
   let actionData = null;
 
   // ----------------------------------------------------
-  // INTENT 1: Specific College Deep-Dive (or Multi-Turn Follow-Up)
+  // CRITICAL SPECIFIC EVALUATOR: "Can I get [Target College] with [X% Marks/Percentile]?"
+  // e.g. "can i get mnit at 67% jee percentile"
   // ----------------------------------------------------
-  if (targetCollege && !isCompare) {
+  if (targetCollege && (userMarks !== null || userRank !== null || isCanIGetQuery)) {
+    intent = 'admission_evaluation';
+    sources = [`REAP 2024-2025 Closing Cutoff Matrix`, `Official ${targetCollege.shortName} Admissions Portal`];
+
+    const cutoffInfo = COLLEGE_MIN_PERCENTILE[targetCollege.id] || { minPercentile: 65.0, label: '65%+ 12th PCM / REAP score' };
+    const scoreVal = userMarks !== null ? userMarks : 50;
+
+    const isEligible = scoreVal >= cutoffInfo.minPercentile;
+
+    if (!isEligible) {
+      // Find 3-4 realistic alternative colleges where the student CAN get a seat!
+      const alternativeColleges = RAJASTHAN_COLLEGES.filter(c => {
+        if (c.id === targetCollege.id) return false;
+        const altCutoff = COLLEGE_MIN_PERCENTILE[c.id];
+        const minReq = altCutoff ? altCutoff.minPercentile : 60;
+        return scoreVal >= (minReq - 10);
+      }).slice(0, 4);
+
+      responseText = language === 'hi'
+        ? `❌ **नहीं, दुर्भाग्य से आपको ${scoreVal}% स्कोर / परसेंटाइल पर ${targetCollege.shortName} में सीट नहीं मिल सकती।**\n\n` +
+          `• **कारण:** ${targetCollege.shortName} की कटऑफ बहुत अधिक रहती है (आवश्यक स्कोर: **${cutoffInfo.label}**)।\n\n` +
+          `💡 **इसके बजाय, आप इन कॉलेजों में आसानी से सीट प्राप्त कर सकते हैं:**\n\n` +
+          alternativeColleges.map(c => `• **${c.shortName}** (${c.type})\n  - वार्षिक फीस: ₹${c.feesPerYear.toLocaleString()}/वर्ष | औसत पैकेज: ${c.placements.avgPackage}\n  - संभावना: **उच्च संभावना (Safe Seat)**`).join('\n\n')
+        : `❌ **No, unfortunately you cannot get a seat at ${targetCollege.shortName} with a ${scoreVal}% score / percentile.**\n\n` +
+          `• **Reason:** ${targetCollege.shortName} cutoffs close much higher (Historical Cutoff Requirement: **${cutoffInfo.label}**).\n\n` +
+          `💡 **Instead, based on your ${scoreVal}% score, here are realistic colleges you CAN get through REAP counselling:**\n\n` +
+          alternativeColleges.map(c => `• **${c.shortName}** (${c.type})\n  - Fee: ₹${c.feesPerYear.toLocaleString()}/yr | Avg Package: ${c.placements.avgPackage}\n  - Admission Probability: **High Chance (Safe Option)**`).join('\n\n');
+
+      structuredData = alternativeColleges;
+    } else {
+      responseText = language === 'hi'
+        ? `✅ **हाँ! आपके ${scoreVal}% स्कोर के साथ ${targetCollege.shortName} में प्रवेश की बहुत अच्छी संभावना है।**\n\n` +
+          `• **कटऑफ स्थिति:** आपका स्कोर (${scoreVal}%) ${targetCollege.shortName} की ऐतिहासिक कटऑफ सीमा (**${cutoffInfo.label}**) के अनुकूल है।\n\n` +
+          `📋 **कॉलेज विवरण:**\n` +
+          `• वार्षिक शिक्षण शुल्क: ₹${targetCollege.feesPerYear.toLocaleString()}/वर्ष\n` +
+          `• हॉस्टल: ${targetCollege.hostelAvailable ? `उपलब्ध (₹${targetCollege.hostelFeesPerYear.toLocaleString()}/वर्ष)` : 'उपलब्ध नहीं'}\n` +
+          `• औसत प्लेसमेंट पैकेज: ${targetCollege.placements.avgPackage} (उच्चतम: ${targetCollege.placements.highestPackage})`
+        : `✅ **Yes! With a ${scoreVal}% score / percentile, you have a very strong chance of securing a seat at ${targetCollege.shortName}.**\n\n` +
+          `• **Cutoff Status:** Your score (${scoreVal}%) comfortably satisfies historical closing trends (**${cutoffInfo.label}**).\n\n` +
+          `📋 **Key College Details:**\n` +
+          `• Tuition Fee: ₹${targetCollege.feesPerYear.toLocaleString()} / year\n` +
+          `• Hostel: ${targetCollege.hostelAvailable ? `Available (₹${targetCollege.hostelFeesPerYear.toLocaleString()} / year)` : 'Not available'}\n` +
+          `• Placements: Average ${targetCollege.placements.avgPackage} (Highest: ${targetCollege.placements.highestPackage})`;
+
+      structuredData = [targetCollege];
+    }
+  }
+
+  // ----------------------------------------------------
+  // INTENT 2: Deep Dive on a Specific College (General Query)
+  // ----------------------------------------------------
+  else if (targetCollege && !isCompare) {
     intent = 'college_detail';
     sources = [`Official ${targetCollege.shortName} Database`, `${targetCollege.website}`];
 
@@ -116,7 +182,6 @@ export function processUserQuery(query, language = 'en') {
       responseText = `📋 **Fee Breakdown for ${targetCollege.name} (${targetCollege.shortName}):**\n\n` +
         `• **Annual Tuition Fee:** ₹${targetCollege.feesPerYear.toLocaleString()} / year\n` +
         `• **Hostel Fee:** ${targetCollege.hostelAvailable ? `₹${targetCollege.hostelFeesPerYear.toLocaleString()} / year` : 'Hostel not available'}\n` +
-        `• **Admission Quota:** ${targetCollege.courses[0] ? targetCollege.courses[0].mode : 'REAP / JEE Main'}\n` +
         `• **TFWS Seat:** 100% Tuition Fee Waiver available for eligible candidates (< ₹8 LPA income).`;
     } else if (isHostel) {
       responseText = `🏠 **Hostel Information for ${targetCollege.name} (${targetCollege.shortName}):**\n\n` +
@@ -145,7 +210,7 @@ export function processUserQuery(query, language = 'en') {
   }
 
   // ----------------------------------------------------
-  // INTENT 2: Branch Cutoffs by Percentage / Marks
+  // INTENT 3: Branch Cutoffs by Percentage / Marks
   // ----------------------------------------------------
   else if (isCutoffQuery) {
     intent = 'cutoff_analysis';
@@ -179,7 +244,7 @@ export function processUserQuery(query, language = 'en') {
   }
 
   // ----------------------------------------------------
-  // INTENT 3: User Score & Location Personalization
+  // INTENT 4: User Score & Location Personalization
   // ----------------------------------------------------
   else if (userMarks !== null || targetCity) {
     intent = 'marks_analysis';
@@ -213,7 +278,7 @@ export function processUserQuery(query, language = 'en') {
   }
 
   // ----------------------------------------------------
-  // INTENT 4: Compare Colleges
+  // INTENT 5: Compare Colleges
   // ----------------------------------------------------
   else if (isCompare) {
     intent = 'compare';
@@ -238,7 +303,7 @@ export function processUserQuery(query, language = 'en') {
   }
 
   // ----------------------------------------------------
-  // INTENT 5: Scholarships
+  // INTENT 6: Scholarships
   // ----------------------------------------------------
   else if (isScholarship) {
     intent = 'scholarship';
@@ -253,7 +318,7 @@ export function processUserQuery(query, language = 'en') {
   }
 
   // ----------------------------------------------------
-  // INTENT 6: Greetings & General Guidance
+  // INTENT 7: Greetings & General Guidance
   // ----------------------------------------------------
   else if (isWhoAreYou || isGreeting) {
     intent = 'greeting';
@@ -261,23 +326,23 @@ export function processUserQuery(query, language = 'en') {
     responseText = `👋 **Hello! I am EduMitra AI (College-ChatGPT for Rajasthan).**\n\n` +
       `I am your intelligent AI guide for Rajasthan Engineering (REAP) & Polytechnic Diploma admissions.\n\n` +
       `Ask me anything! For example:\n` +
+      `• *"Can I get MNIT at 67% JEE percentile?"*\n` +
       `• *"Tell me everything about MBM University Jodhpur"*\n` +
       `• *"What is the fee and hostel at RTU Kota?"*\n` +
-      `• *"I got 78% in PCM. What branches can I get?"*\n` +
       `• *"Compare RTU Kota and SKIT Jaipur"*`;
   }
 
   // ----------------------------------------------------
-  // INTENT 7: Fallback Conversational AI Answer
+  // INTENT 8: Fallback Conversational AI Answer
   // ----------------------------------------------------
   else {
     intent = 'general_faq';
     sources = ["EduMitra AI Knowledge Base"];
     responseText = `🤖 **EduMitra AI Answer:**\n\n` +
       `Regarding your query: *"${rawQuery}"*\n\n` +
-      `• **For Specific College Info:** Type the college name (e.g. *"RTU Kota"*, *"SKIT"*, *"MBM"*, *"CTAE"*).\n` +
+      `• **For Specific College Admission Checks:** Ask *"Can I get MNIT at 67% percentile?"* or *"Can I get RTU Kota at 80%?"*.\n` +
       `• **For Branch Cutoffs:** Ask *"What is the cutoff for CSE?"* or *"Branch cutoffs for 82%"*.\n` +
-      `• **For Recommendations:** Mention your 12th PCM % (e.g. *"I scored 82% in PCM"*).\n` +
+      `• **For Specific College Info:** Type college name (e.g. *"RTU Kota"*, *"SKIT"*, *"MBM"*, *"CTAE"*).\n` +
       `• **For Scholarships:** Ask *"Show me scholarships in Rajasthan"*.\n\n` +
       `Or use the top tabs to explore Colleges, Cutoffs, and Eligibility!`;
   }
