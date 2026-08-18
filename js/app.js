@@ -7,9 +7,13 @@ import { initCutoffExplorerComponent } from './components/cutoffExplorer.js';
 import { initEligibilityCheckerComponent } from './components/eligibilityChecker.js';
 import { initScholarshipFinderComponent } from './components/scholarshipFinder.js';
 import { initAdmissionRoadmapComponent } from './components/admissionRoadmap.js';
+import { initAuthSystem } from './components/authModal.js';
 import { TRANSLATIONS } from './services/i18n.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Initialize Auth System (Login modal, Google OAuth, Mobile OTP, Header Profile Widget)
+  initAuthSystem();
+
   // Global State
   window.currentLanguage = 'en';
 

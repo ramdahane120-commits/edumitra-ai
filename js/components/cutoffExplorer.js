@@ -2,10 +2,15 @@
 
 import { REAP_CUTOFFS } from '../data/cutoffs.js';
 import { RAJASTHAN_COLLEGES } from '../data/colleges.js';
+import { AuthService } from '../services/auth.js';
+import { openAuthModal } from './authModal.js';
 
 export function initCutoffExplorerComponent(containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
+
+  const currentUser = AuthService.getUser();
+  const defaultCategory = currentUser?.category || 'General';
 
   container.innerHTML = `
     <div>
@@ -26,12 +31,12 @@ export function initCutoffExplorerComponent(containerId) {
         <div class="filter-group">
           <label>Category</label>
           <select id="cutoffCategorySelect" class="filter-select">
-            <option value="General">General / Open</option>
-            <option value="OBC-NCL">OBC-NCL</option>
-            <option value="EWS">EWS</option>
-            <option value="SC">SC</option>
-            <option value="ST">ST</option>
-            <option value="TFWS">TFWS (Tuition Fee Waiver)</option>
+            <option value="General" ${defaultCategory === 'General' ? 'selected' : ''}>General / Open</option>
+            <option value="OBC-NCL" ${defaultCategory === 'OBC-NCL' ? 'selected' : ''}>OBC-NCL</option>
+            <option value="EWS" ${defaultCategory === 'EWS' ? 'selected' : ''}>EWS</option>
+            <option value="SC" ${defaultCategory === 'SC' ? 'selected' : ''}>SC</option>
+            <option value="ST" ${defaultCategory === 'ST' ? 'selected' : ''}>ST</option>
+            <option value="TFWS" ${defaultCategory === 'TFWS' ? 'selected' : ''}>TFWS (Tuition Fee Waiver)</option>
           </select>
         </div>
         <div class="filter-group">
@@ -57,6 +62,8 @@ export function initCutoffExplorerComponent(containerId) {
 
     const college = RAJASTHAN_COLLEGES.find(c => c.id === selectedCollegeId);
     const cutoffsObj = REAP_CUTOFFS.find(c => c.collegeId === selectedCollegeId);
+    const user = AuthService.getUser();
+    const isSaved = user && (user.savedColleges || []).includes(selectedCollegeId);
 
     let cutoffRows = [];
     if (cutoffsObj) {
@@ -82,9 +89,14 @@ export function initCutoffExplorerComponent(containerId) {
             <h3 style="font-family:var(--font-heading); font-size:1.3rem; color:#fff;">${college.name}</h3>
             <p style="font-size:0.85rem; color:var(--text-muted);">Branch: ${cutoffsObj ? cutoffsObj.branch : 'Computer Science & Engineering'}</p>
           </div>
-          <div style="text-align:right;">
-            <div style="font-size:0.8rem; color:var(--text-muted);">Safety Estimation for ${userPct}%:</div>
-            <strong style="color:${safetyColor}; font-size:1.05rem;">${safetyLabel}</strong>
+          <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
+            <button id="toggleSaveCollegeBtn" class="auth-btn" style="background:${isSaved ? 'var(--accent-amber)' : 'rgba(255,255,255,0.08)'}; color:${isSaved ? '#000' : '#fff'}; border:1px solid var(--border-glass);">
+              ${isSaved ? '★ Shortlisted' : '☆ Save to Shortlist'}
+            </button>
+            <div style="text-align:right;">
+              <div style="font-size:0.8rem; color:var(--text-muted);">Safety Estimation for ${userPct}%:</div>
+              <strong style="color:${safetyColor}; font-size:1.05rem;">${safetyLabel}</strong>
+            </div>
           </div>
         </div>
       </div>
@@ -124,6 +136,27 @@ export function initCutoffExplorerComponent(containerId) {
         </table>
       </div>
     `;
+
+    const saveBtn = document.getElementById('toggleSaveCollegeBtn');
+    if (saveBtn) {
+      saveBtn.addEventListener('click', () => {
+        const u = AuthService.getUser();
+        if (!u) {
+          openAuthModal();
+          return;
+        }
+        const saved = u.savedColleges || [];
+        const index = saved.indexOf(selectedCollegeId);
+        if (index >= 0) {
+          saved.splice(index, 1);
+        } else {
+          saved.push(selectedCollegeId);
+        }
+        u.savedColleges = saved;
+        AuthService.setUser(u);
+        renderCutoffs();
+      });
+    }
   }
 
   [collegeSelect, catSelect, scoreInput].forEach(el => el.addEventListener('change', renderCutoffs));

@@ -1,0 +1,496 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EduMitra AI - SIH 2025 Presentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  @page {
+    size: 1920px 1080px;
+    margin: 0;
+  }
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0F172A;
+    color: #1E293B;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .slide {
+    width: 1920px;
+    height: 1080px;
+    position: relative;
+    background: #F8FAFC;
+    page-break-after: always;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 50px 70px 40px 70px;
+  }
+
+  /* Header Bar */
+  .slide-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #E2E8F0;
+    padding-bottom: 18px;
+    margin-bottom: 25px;
+  }
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .sih-badge {
+    background: linear-gradient(135deg, #1E3A8A, #2563EB);
+    color: #FFFFFF;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    text-transform: uppercase;
+  }
+  .slide-title-header {
+    font-family: 'Outfit', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #0F172A;
+  }
+  .header-right {
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #64748B;
+    display: flex;
+    gap: 20px;
+  }
+  .header-right span {
+    background: #E2E8F0;
+    padding: 6px 12px;
+    border-radius: 6px;
+    color: #1E293B;
+  }
+
+  /* Footer Bar */
+  .slide-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #E2E8F0;
+    padding-top: 15px;
+    margin-top: 20px;
+    font-size: 13px;
+    color: #64748B;
+    font-weight: 500;
+  }
+  .slide-number {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    color: #1E3A8A;
+    background: #DBEAFE;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  /* Slide 1 - Hero */
+  .hero-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    height: 100%;
+    align-items: center;
+  }
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #FEF3C7;
+    color: #B45309;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 8px 16px;
+    border-radius: 30px;
+    width: fit-content;
+    border: 1px solid #FCD34D;
+  }
+  .hero-main-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 58px;
+    font-weight: 800;
+    line-height: 1.1;
+    color: #0F172A;
+  }
+  .hero-main-title span {
+    color: #2563EB;
+    background: linear-gradient(135deg, #1E3A8A, #2563EB);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-sub {
+    font-size: 20px;
+    color: #475569;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+  .meta-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 10px;
+  }
+  .meta-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    padding: 16px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+  }
+  .meta-card-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #64748B;
+    letter-spacing: 0.5px;
+  }
+  .meta-card-val {
+    font-family: 'Outfit', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #0F172A;
+    margin-top: 4px;
+  }
+
+  .hero-visual {
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.08);
+    border: 1px solid #E2E8F0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .hero-visual-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1E3A8A;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Grid Layouts */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    height: 100%;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    height: 100%;
+  }
+
+  .card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 16px;
+    padding: 26px;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: #DBEAFE;
+    color: #1E3A8A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .card-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #0F172A;
+  }
+  .card-desc {
+    font-size: 15px;
+    color: #475569;
+    line-height: 1.6;
+  }
+
+  /* Flowchart / Steps styling */
+  .workflow-box {
+    background: #F1F5F9;
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px dashed #CBD5E1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .workflow-step {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-left: 5px solid #2563EB;
+    padding: 16px 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  }
+  .step-num {
+    background: #1E3A8A;
+    color: #FFF;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .step-content {
+    display: flex;
+    flex-direction: column;
+  }
+  .step-title {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #0F172A;
+  }
+  .step-detail {
+    font-size: 13px;
+    color: #64748B;
+  }
+
+  /* Table styling */
+  .styled-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03);
+  }
+  .styled-table th {
+    background: #1E3A8A;
+    color: #FFFFFF;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 14px 18px;
+    text-align: left;
+  }
+  .styled-table td {
+    background: #FFFFFF;
+    padding: 14px 18px;
+    font-size: 14px;
+    color: #334155;
+    border-bottom: 1px solid #E2E8F0;
+  }
+  .styled-table tr:last-child td {
+    border-bottom: none;
+  }
+  .risk-badge {
+    background: #FEE2E2;
+    color: #991B1B;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+  }
+  .strat-badge {
+    background: #D1FAE5;
+    color: #065F46;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+  }
+
+  /* Stats Cards */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  .stat-card {
+    background: linear-gradient(135deg, #1E3A8A, #1E40AF);
+    color: #FFFFFF;
+    padding: 24px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(30,58,138,0.15);
+  }
+  .stat-val {
+    font-family: 'Outfit', sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    color: #F59E0B;
+  }
+  .stat-label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 4px;
+    color: #E2E8F0;
+  }
+
+  /* Tech Pill Tags */
+  .tech-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .tech-pill {
+    background: #EFF6FF;
+    color: #1E40AF;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid #BFDBFE;
+  }
+
+  .img-container {
+    width: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #CBD5E1;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.06);
+  }
+  .img-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>
+</head>
+<body style="background:#0F172A; margin:0; padding:0; overflow:hidden;">
+<div class="slide">
+  <div class="slide-header">
+    <div class="header-left">
+      <span class="sih-badge">FEASIBILITY & VIABILITY</span>
+      <span class="slide-title-header">Technical Feasibility & Comprehensive Risk Strategy</span>
+    </div>
+    <div class="header-right">
+      <span>TEAM: ENDEAVOURS</span>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <!-- Left Column: Feasibility -->
+    <div style="display:flex; flex-direction:column; gap:20px;">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">âš¡</div>
+          <div class="card-title">High Technical Feasibility</div>
+        </div>
+        <div class="card-desc">Built using open-source, lightweight Llama 3 LLM and ChromaDB vector store. Can be self-hosted on cost-effective cloud infrastructure without heavy per-query API licensing costs.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">ðŸ“±</div>
+          <div class="card-title">Low-Bandwidth Rural Practicality</div>
+        </div>
+        <div class="card-desc">Optimized Progressive Web App (PWA) under 2MB payload size + WhatsApp Bot fallback ensures seamless operation across 2G/3G networks in remote districts of Rajasthan.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">ðŸ›ï¸</div>
+          <div class="card-title">DTE Rajasthan Data Ingestion</div>
+        </div>
+        <div class="card-desc">Automated ETL data ingestion pipeline continuously updates seat matrices, fee changes, and REAP round-wise cutoffs directly from official government notifications.</div>
+      </div>
+    </div>
+
+    <!-- Right Column: Risk & Mitigation Table -->
+    <div style="display:flex; flex-direction:column; gap:16px;">
+      <div style="font-family:'Outfit',sans-serif; font-weight:700; font-size:18px; color:#0F172A;">
+        âš ï¸ Risk Analysis & Mitigation Matrix
+      </div>
+
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Potential Challenge / Risk</th>
+            <th>Impact</th>
+            <th>Mitigation Strategy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Dynamic Yearly REAP Seat Matrix Updates</strong></td>
+            <td><span class="risk-badge">MEDIUM</span></td>
+            <td><span class="strat-badge">Automated Web Scraper + DTE Admin Verification Portal for fast dataset re-indexing.</span></td>
+          </tr>
+          <tr>
+            <td><strong>Low Digital Literacy in Rural Parents</strong></td>
+            <td><span class="risk-badge">HIGH</span></td>
+            <td><span class="strat-badge">Voice-first Hindi Q&A interface via Bhashini Speech API + WhatsApp bot integration.</span></td>
+          </tr>
+          <tr>
+            <td><strong>AI Hallucination in Admission Advice</strong></td>
+            <td><span class="risk-badge">CRITICAL</span></td>
+            <td><span class="strat-badge">Strict RAG grounding over DTE rulebooks with mandatory source URL citations.</span></td>
+          </tr>
+          <tr>
+            <td><strong>Server Traffic Spikes During REAP Counselling</strong></td>
+            <td><span class="risk-badge">MEDIUM</span></td>
+            <td><span class="strat-badge">Redis query caching for popular FAQs + auto-scaling Docker microservices.</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span>Smart India Hackathon 2025 â€” Official Idea Submission</span>
+    <span class="slide-number">Slide 04 of 06</span>
+  </div>
+</div>
+</body>
+</html>

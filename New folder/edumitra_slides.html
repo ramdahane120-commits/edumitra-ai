@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EduMitra AI - SIH 2025 Presentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  @page {
+    size: 1920px 1080px;
+    margin: 0;
+  }
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0F172A;
+    color: #1E293B;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .slide {
+    width: 1920px;
+    height: 1080px;
+    position: relative;
+    background: #F8FAFC;
+    page-break-after: always;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 50px 70px 40px 70px;
+  }
+
+  /* Header Bar */
+  .slide-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #E2E8F0;
+    padding-bottom: 18px;
+    margin-bottom: 25px;
+  }
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .sih-badge {
+    background: linear-gradient(135deg, #1E3A8A, #2563EB);
+    color: #FFFFFF;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    text-transform: uppercase;
+  }
+  .slide-title-header {
+    font-family: 'Outfit', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #0F172A;
+  }
+  .header-right {
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #64748B;
+    display: flex;
+    gap: 20px;
+  }
+  .header-right span {
+    background: #E2E8F0;
+    padding: 6px 12px;
+    border-radius: 6px;
+    color: #1E293B;
+  }
+
+  /* Footer Bar */
+  .slide-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #E2E8F0;
+    padding-top: 15px;
+    margin-top: 20px;
+    font-size: 13px;
+    color: #64748B;
+    font-weight: 500;
+  }
+  .slide-number {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    color: #1E3A8A;
+    background: #DBEAFE;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  /* Slide 1 - Hero */
+  .hero-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    height: 100%;
+    align-items: center;
+  }
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #FEF3C7;
+    color: #B45309;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 8px 16px;
+    border-radius: 30px;
+    width: fit-content;
+    border: 1px solid #FCD34D;
+  }
+  .hero-main-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 58px;
+    font-weight: 800;
+    line-height: 1.1;
+    color: #0F172A;
+  }
+  .hero-main-title span {
+    color: #2563EB;
+    background: linear-gradient(135deg, #1E3A8A, #2563EB);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-sub {
+    font-size: 20px;
+    color: #475569;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+  .meta-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 10px;
+  }
+  .meta-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    padding: 16px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+  }
+  .meta-card-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #64748B;
+    letter-spacing: 0.5px;
+  }
+  .meta-card-val {
+    font-family: 'Outfit', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #0F172A;
+    margin-top: 4px;
+  }
+
+  .hero-visual {
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.08);
+    border: 1px solid #E2E8F0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .hero-visual-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1E3A8A;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Grid Layouts */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    height: 100%;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    height: 100%;
+  }
+
+  .card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 16px;
+    padding: 26px;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: #DBEAFE;
+    color: #1E3A8A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .card-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #0F172A;
+  }
+  .card-desc {
+    font-size: 15px;
+    color: #475569;
+    line-height: 1.6;
+  }
+
+  /* Flowchart / Steps styling */
+  .workflow-box {
+    background: #F1F5F9;
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px dashed #CBD5E1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .workflow-step {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-left: 5px solid #2563EB;
+    padding: 16px 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  }
+  .step-num {
+    background: #1E3A8A;
+    color: #FFF;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .step-content {
+    display: flex;
+    flex-direction: column;
+  }
+  .step-title {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #0F172A;
+  }
+  .step-detail {
+    font-size: 13px;
+    color: #64748B;
+  }
+
+  /* Table styling */
+  .styled-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03);
+  }
+  .styled-table th {
+    background: #1E3A8A;
+    color: #FFFFFF;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 14px 18px;
+    text-align: left;
+  }
+  .styled-table td {
+    background: #FFFFFF;
+    padding: 14px 18px;
+    font-size: 14px;
+    color: #334155;
+    border-bottom: 1px solid #E2E8F0;
+  }
+  .styled-table tr:last-child td {
+    border-bottom: none;
+  }
+  .risk-badge {
+    background: #FEE2E2;
+    color: #991B1B;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+  }
+  .strat-badge {
+    background: #D1FAE5;
+    color: #065F46;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+  }
+
+  /* Stats Cards */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  .stat-card {
+    background: linear-gradient(135deg, #1E3A8A, #1E40AF);
+    color: #FFFFFF;
+    padding: 24px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(30,58,138,0.15);
+  }
+  .stat-val {
+    font-family: 'Outfit', sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    color: #F59E0B;
+  }
+  .stat-label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 4px;
+    color: #E2E8F0;
+  }
+
+  /* Tech Pill Tags */
+  .tech-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .tech-pill {
+    background: #EFF6FF;
+    color: #1E40AF;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid #BFDBFE;
+  }
+
+  .img-container {
+    width: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #CBD5E1;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.06);
+  }
+  .img-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1 -->
+<div class="slide">
+  <div class="slide-header">
+    <div class="header-left">
+      <span class="sih-badge">SMART INDIA HACKATHON 2025</span>
+      <span class="slide-title-header">IDEA PRESENTATION SLIDE 01</span>
+    </div>
+    <div class="header-right">
+      <span>THEME: EDTECH</span>
+      <span>CATEGORY: SOFTWARE</span>
+    </div>
+  </div>
+
+  <div class="hero-container">
+    <div class="hero-text">
+      <div class="hero-tag">⚡ Problem Statement ID: SIH2025-EDTECH-03</div>
+      <h1 class="hero-main-title">EduMitra AI <span>(एड्यूमित्र AI)</span></h1>
+      <p class="hero-sub">Centralized Multilingual AI Student Assistance & College Recommendation Platform for Rajasthan Technical Education</p>
+      
+      <div class="meta-card-grid">
+        <div class="meta-card">
+          <div class="meta-card-label">Problem Statement</div>
+          <div class="meta-card-val">Rajasthan Technical Admission Guidance</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-card-label">Team Name</div>
+          <div class="meta-card-val">Endeavours</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-card-label">Target Portals</div>
+          <div class="meta-card-val">REAP & DTE Rajasthan</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-card-label">Primary Languages</div>
+          <div class="meta-card-val">Hindi, English & Voice</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-visual-title">🎯 Core Solution Innovation</div>
+      <div class="workflow-step" style="border-left-color: #F59E0B;">
+        <div class="step-num" style="background:#F59E0B;">1</div>
+        <div class="step-content">
+          <div class="step-title">Multilingual Voice & Text AI Chatbot</div>
+          <div class="step-detail">Instant natural language answers in Hindi & English for rural & urban students.</div>
+        </div>
+      </div>
+      <div class="workflow-step" style="border-left-color: #2563EB;">
+        <div class="step-num" style="background:#2563EB;">2</div>
+        <div class="step-content">
+          <div class="step-title">REAP Rank & Cutoff Predictor Engine</div>
+          <div class="step-detail">Data-driven college recommendations based on 5-year historical REAP/DTE cutoffs.</div>
+        </div>
+      </div>
+      <div class="workflow-step" style="border-left-color: #059669;">
+        <div class="step-num" style="background:#059669;">3</div>
+        <div class="step-content">
+          <div class="step-title">Automated Scholarship & Fee Matcher</div>
+          <div class="step-detail">Maps CM Higher Education & Govt welfare schemes to student profiles.</div>
+        </div>
+      </div>
+      <div class="workflow-step" style="border-left-color: #7C3AED;">
+        <div class="step-num" style="background:#7C3AED;">4</div>
+        <div class="step-content">
+          <div class="step-title">80% Workload Reduction for Colleges</div>
+          <div class="step-detail">Eliminates repetitive calls and counter visits for admission staff.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span>Smart India Hackathon 2025 — Official Idea Submission</span>
+    <span class="slide-number">Slide 01 of 06</span>
+  </div>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide">
+  <div class="slide-header">
+    <div class="header-left">
+      <span class="sih-badge">PROPOSED SOLUTION</span>
+      <span class="slide-title-header">EduMitra AI — End-to-End Admission Intelligence System</span>
+    </div>
+    <div class="header-right">
+      <span>TEAM: ENDEAVOURS</span>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <!-- Left Column: Core Solution Pillars -->
+    <div style="display:flex; flex-direction:column; gap:16px;">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">💬</div>
+          <div class="card-title">Multilingual Conversational AI</div>
+        </div>
+        <div class="card-desc">Voice & text interface powered by Bhashini AI supporting Hindi, English, and Rajasthani dialects to resolve queries on eligibility, hostels, fees, and cutoffs.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">🎯</div>
+          <div class="card-title">Smart REAP & DTE Rank Predictor</div>
+        </div>
+        <div class="card-desc">Algorithms analyze 5-year historical REAP percentile cutoffs to suggest optimal engineering & polytechnic colleges based on marks, rank, category, and preferred location.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">📊</div>
+          <div class="card-title">Side-by-Side Institution Evaluator</div>
+        </div>
+        <div class="card-desc">Compare up to 4 colleges simultaneously across NAAC accreditation, median placement CTC, faculty ratio, hostel amenities, and total fee breakdown.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">🎁</div>
+          <div class="card-title">Scholarship & Financial Aid Matcher</div>
+        </div>
+        <div class="card-desc">Automatically identifies eligible state government scholarships (e.g., CM Higher Education Scheme, Post-Matric) to reduce financial barriers for rural students.</div>
+      </div>
+    </div>
+
+    <!-- Right Column: Visual UI Mockup & Step Workflow -->
+    <div style="display:flex; flex-direction:column; gap:20px;">
+      <div class="img-container">
+        <img src="edumitra_ui.jpg" alt="EduMitra AI Interface Mockup">
+      </div>
+
+      <div class="workflow-box">
+        <div style="font-family:'Outfit',sans-serif; font-weight:700; font-size:16px; color:#1E3A8A; display:flex; justify-content:space-between; align-items:center;">
+          <span>🔄 END-TO-END STUDENT WORKFLOW</span>
+          <span style="font-size:12px; background:#DBEAFE; color:#1E40AF; padding:2px 8px; border-radius:4px;">REAL-TIME RAG FLOW</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:10px;">
+          <div style="background:#FFF; padding:12px; border-radius:8px; border:1px solid #CBD5E1; text-align:center;">
+            <div style="font-size:12px; font-weight:700; color:#2563EB;">STEP 1</div>
+            <div style="font-size:13px; font-weight:700; color:#0F172A; margin-top:2px;">Student Query</div>
+            <div style="font-size:11px; color:#64748B;">Voice/Text in Hindi</div>
+          </div>
+          <div style="background:#FFF; padding:12px; border-radius:8px; border:1px solid #CBD5E1; text-align:center;">
+            <div style="font-size:12px; font-weight:700; color:#2563EB;">STEP 2</div>
+            <div style="font-size:13px; font-weight:700; color:#0F172A; margin-top:2px;">AI Processing</div>
+            <div style="font-size:11px; color:#64748B;">RAG + REAP Vectors</div>
+          </div>
+          <div style="background:#FFF; padding:12px; border-radius:8px; border:1px solid #CBD5E1; text-align:center;">
+            <div style="font-size:12px; font-weight:700; color:#2563EB;">STEP 3</div>
+            <div style="font-size:13px; font-weight:700; color:#0F172A; margin-top:2px;">Match Output</div>
+            <div style="font-size:11px; color:#64748B;">Rank-Cutoff Matrix</div>
+          </div>
+          <div style="background:#FFF; padding:12px; border-radius:8px; border:1px solid #CBD5E1; text-align:center;">
+            <div style="font-size:12px; font-weight:700; color:#2563EB;">STEP 4</div>
+            <div style="font-size:13px; font-weight:700; color:#0F172A; margin-top:2px;">Direct Action</div>
+            <div style="font-size:11px; color:#64748B;">Apply REAP Form</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span>Smart India Hackathon 2025 — Official Idea Submission</span>
+    <span class="slide-number">Slide 02 of 06</span>
+  </div>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide">
+  <div class="slide-header">
+    <div class="header-left">
+      <span class="sih-badge">TECHNICAL APPROACH</span>
+      <span class="slide-title-header">Microservices & Retrieval-Augmented Generation (RAG) Architecture</span>
+    </div>
+    <div class="header-right">
+      <span>TEAM: ENDEAVOURS</span>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <!-- Left Column: Architecture Diagram Graphic -->
+    <div style="display:flex; flex-direction:column; gap:16px;">
+      <div class="img-container">
+        <img src="edumitra_architecture.jpg" alt="EduMitra AI System Architecture">
+      </div>
+
+      <div class="card" style="padding:20px;">
+        <div class="card-title" style="font-size:17px;">🛠️ Complete Tech Stack Credentials</div>
+        <div class="tech-pills">
+          <span class="tech-pill">React.js (Frontend PWA)</span>
+          <span class="tech-pill">Python FastAPI</span>
+          <span class="tech-pill">Node.js Express</span>
+          <span class="tech-pill">Llama-3 8B LLM</span>
+          <span class="tech-pill">ChromaDB Vector Store</span>
+          <span class="tech-pill">PostgreSQL</span>
+          <span class="tech-pill">Redis Caching</span>
+          <span class="tech-pill">Bhashini Voice STT/TTS</span>
+          <span class="tech-pill">Docker & K8s</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Layer by Layer Explanation -->
+    <div style="display:flex; flex-direction:column; gap:16px;">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon" style="background:#E0E7FF; color:#4338CA;">01</div>
+          <div>
+            <div class="card-title">User Access & Multilingual Layer</div>
+            <div class="card-desc" style="font-size:14px; margin-top:2px;">Responsive React.js PWA + WhatsApp API integration. Integrates **Bhashini Indic API** for real-time speech recognition (STT) and voice synthesis (TTS) in Hindi & English.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon" style="background:#FCE7F3; color:#BE185D;">02</div>
+          <div>
+            <div class="card-title">AI & RAG Intelligence Engine</div>
+            <div class="card-desc" style="font-size:14px; margin-top:2px;">Python FastAPI microservice utilizing **LangChain RAG pipeline** and **Llama-3 8B**. Queries vector embeddings of official REAP seat matrices and DTE handbooks stored in **ChromaDB**.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon" style="background:#DCFCE7; color:#15803D;">03</div>
+          <div>
+            <div class="card-title">Relational Data & Cutoff Engine</div>
+            <div class="card-desc" style="font-size:14px; margin-top:2px;">**PostgreSQL** manages structured datasets for 150+ Rajasthan engineering & polytechnic colleges, previous year cutoffs, fees, placement stats, and hostel availability.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon" style="background:#FEF3C7; color:#B45309;">04</div>
+          <div>
+            <div class="card-title">Zero Hallucination & Citation Engine</div>
+            <div class="card-desc" style="font-size:14px; margin-top:2px;">Strict RAG prompt grounding ensures AI responses are 100% cited from official DTE Rajasthan PDFs, eliminating misinformation in critical admission decisions.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span>Smart India Hackathon 2025 — Official Idea Submission</span>
+    <span class="slide-number">Slide 03 of 06</span>
+  </div>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide">
+  <div class="slide-header">
+    <div class="header-left">
+      <span class="sih-badge">FEASIBILITY & VIABILITY</span>
+      <span class="slide-title-header">Technical Feasibility & Comprehensive Risk Strategy</span>
+    </div>
+    <div class="header-right">
+      <span>TEAM: ENDEAVOURS</span>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <!-- Left Column: Feasibility -->
+    <div style="display:flex; flex-direction:column; gap:20px;">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">⚡</div>
+          <div class="card-title">High Technical Feasibility</div>
+        </div>
+        <div class="card-desc">Built using open-source, lightweight Llama 3 LLM and ChromaDB vector store. Can be self-hosted on cost-effective cloud infrastructure without heavy per-query API licensing costs.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">📱</div>
+          <div class="card-title">Low-Bandwidth Rural Practicality</div>
+        </div>
+        <div class="card-desc">Optimized Progressive Web App (PWA) under 2MB payload size + WhatsApp Bot fallback ensures seamless operation across 2G/3G networks in remote districts of Rajasthan.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">🏛️</div>
+          <div class="card-title">DTE Rajasthan Data Ingestion</div>
+        </div>
+        <div class="card-desc">Automated ETL data ingestion pipeline continuously updates seat matrices, fee changes, and REAP round-wise cutoffs directly from official government notifications.</div>
+      </div>
+    </div>
+
+    <!-- Right Column: Risk & Mitigation Table -->
+    <div style="display:flex; flex-direction:column; gap:16px;">
+      <div style="font-family:'Outfit',sans-serif; font-weight:700; font-size:18px; color:#0F172A;">
+        ⚠️ Risk Analysis & Mitigation Matrix
+      </div>
+
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Potential Challenge / Risk</th>
+            <th>Impact</th>
+            <th>Mitigation Strategy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Dynamic Yearly REAP Seat Matrix Updates</strong></td>
+            <td><span class="risk-badge">MEDIUM</span></td>
+            <td><span class="strat-badge">Automated Web Scraper + DTE Admin Verification Portal for fast dataset re-indexing.</span></td>
+          </tr>
+          <tr>
+            <td><strong>Low Digital Literacy in Rural Parents</strong></td>
+            <td><span class="risk-badge">HIGH</span></td>
+            <td><span class="strat-badge">Voice-first Hindi Q&A interface via Bhashini Speech API + WhatsApp bot integration.</span></td>
+          </tr>
+          <tr>
+            <td><strong>AI Hallucination in Admission Advice</strong></td>
+            <td><span class="risk-badge">CRITICAL</span></td>
+            <td><span class="strat-badge">Strict RAG grounding over DTE rulebooks with mandatory source URL citations.</span></td>
+          </tr>
+          <tr>
+            <td><strong>Server Traffic Spikes During REAP Counselling</strong></td>
+            <td><span class="risk-badge">MEDIUM</span></td>
+            <td><span class="strat-badge">Redis query caching for popular FAQs + auto-scaling Docker microservices.</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span>Smart India Hackathon 2025 — Official Idea Submission</span>
+    <span class="slide-number">Slide 04 of 06</span>
+  </div>
+</div>
+
+<!-- SLIDE 5 -->
+<div class="slide">
+  <div class="slide-header">
+    <div class="header-left">
+      <span class="sih-badge">IMPACT & BENEFITS</span>
+      <span class="slide-title-header">Statewide Impact, Benefits & Long-Term Roadmap</span>
+    </div>
+    <div class="header-right">
+      <span>TEAM: ENDEAVOURS</span>
+    </div>
+  </div>
+
+  <!-- Key Metrics Row -->
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-val">80%</div>
+      <div class="stat-label">Reduction in Manual Admission Inquiry Calls</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">&lt; 2 Sec</div>
+      <div class="stat-label">Instant AI Response Time for Complex Queries</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">33</div>
+      <div class="stat-label">Rajasthan Districts Covered Seamlessly</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">100%</div>
+      <div class="stat-label">Free & Transparent Access for Students</div>
+    </div>
+  </div>
+
+  <div class="grid-2" style="height: auto;">
+    <!-- Left Column: Stakeholder Benefits -->
+    <div class="card">
+      <div class="card-title" style="color:#1E3A8A; font-size:18px;">👥 Beneficiary Impact Breakdown</div>
+      <div style="display:flex; flex-direction:column; gap:12px; margin-top:6px;">
+        <div style="border-left:3px solid #2563EB; padding-left:12px;">
+          <strong style="color:#0F172A;">For Students & Parents:</strong> Instant 24/7 clarity on cutoffs & fees without expensive travel or reliance on misleading admission agents.
+        </div>
+        <div style="border-left:3px solid #059669; padding-left:12px;">
+          <strong style="color:#0F172A;">For Technical Colleges:</strong> Offloads thousands of repetitive phone calls/emails during REAP admissions, freeing staff for campus operations.
+        </div>
+        <div style="border-left:3px solid #D97706; padding-left:12px;">
+          <strong style="color:#0F172A;">For DTE & Govt of Rajasthan:</strong> Digitizes counselling guidance, promotes equitable access to rural students, and boosts scholarship enrollment.
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Sustainability & Expansion -->
+    <div class="card">
+      <div class="card-title" style="color:#1E3A8A; font-size:18px;">🚀 Scalability & Sustainability Model</div>
+      <div style="display:flex; flex-direction:column; gap:12px; margin-top:6px;">
+        <div style="border-left:3px solid #7C3AED; padding-left:12px;">
+          <strong style="color:#0F172A;">Direct DTE Rajasthan Deployment:</strong> White-label integration into official `dte.rajasthan.gov.in` and REAP portal widgets.
+        </div>
+        <div style="border-left:3px solid #DB2777; padding-left:12px;">
+          <strong style="color:#0F172A;">Pan-India State Expansion:</strong> Reusable SaaS architecture scalable to other state technical admission boards (MHT-CET, WBJEE, UPTAC).
+        </div>
+        <div style="border-left:3px solid #2563EB; padding-left:12px;">
+          <strong style="color:#0F172A;">Domain Expansion:</strong> Extendable to ITI, Polytechnic diploma, Pharmacy, and Medical (NEET) counselling datasets.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span>Smart India Hackathon 2025 — Official Idea Submission</span>
+    <span class="slide-number">Slide 05 of 06</span>
+  </div>
+</div>
+
+<!-- SLIDE 6 -->
+<div class="slide">
+  <div class="slide-header">
+    <div class="header-left">
+      <span class="sih-badge">RESEARCH & REFERENCES</span>
+      <span class="slide-title-header">Authoritative Data Sources & Technical Citations</span>
+    </div>
+    <div class="header-right">
+      <span>TEAM: ENDEAVOURS</span>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div style="display:flex; flex-direction:column; gap:20px;">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon" style="background:#DBEAFE; color:#1E3A8A;">🏛️</div>
+          <div>
+            <div class="card-title">Department of Technical Education (DTE), Rajasthan</div>
+            <div class="card-desc" style="font-size:13px; margin-top:2px;">Official notifications, polytechnic admission guidelines, fee structures, and institute affiliations. URL: <span style="color:#2563EB; font-weight:600;">dte.rajasthan.gov.in</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon" style="background:#FEF3C7; color:#B45309;">📊</div>
+          <div>
+            <div class="card-title">Rajasthan Engineering Admission Process (REAP)</div>
+            <div class="card-desc" style="font-size:13px; margin-top:2px;">Official REAP seat matrix archives, round-wise cutoffs (2020–2024), and JEE Main / XII mark conversion rules. URL: <span style="color:#2563EB; font-weight:600;">reap2024.com</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:20px;">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon" style="background:#DCFCE7; color:#15803D;">🇮🇳</div>
+          <div>
+            <div class="card-title">Bhashini — National Language Translation Mission</div>
+            <div class="card-desc" style="font-size:13px; margin-top:2px;">Open APIs for Indic language speech recognition (ASR) and text translation under Ministry of Electronics & IT (MeitY). URL: <span style="color:#2563EB; font-weight:600;">bhashini.gov.in</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon" style="background:#F3E8FF; color:#6B21A8;">📚</div>
+          <div>
+            <div class="card-title">IEEE & ACM AI Literature References</div>
+            <div class="card-desc" style="font-size:13px; margin-top:2px;">Research paper: <em>"Retrieval-Augmented Generation for Public Governance Q&A Systems"</em> (IEEE Access 2024) & AI in Higher Education (ACM Digital Library).</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span>Smart India Hackathon 2025 — Official Idea Submission</span>
+    <span class="slide-number">Slide 06 of 06</span>
+  </div>
+</div>
+
+</body>
+</html>
