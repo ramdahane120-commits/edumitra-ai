@@ -287,7 +287,7 @@ body {
   transform: translateY(-2px);
 }
 
-/* Chat Interface Styling */
+/* Chat Interface Styling — Modern AI Trust Theme */
 .chat-layout {
   display: grid;
   grid-template-columns: 1fr 340px;
@@ -302,19 +302,25 @@ body {
   display: flex;
   flex-direction: column;
   height: 620px;
-  background: var(--bg-card);
+  background: #ffffff;
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-lg);
   overflow: hidden;
+  box-shadow: var(--shadow-card);
 }
 
 .chat-header {
   padding: 1rem 1.5rem;
-  background: rgba(15, 23, 42, 0.9);
-  border-bottom: 1px solid var(--border-glass);
+  background: linear-gradient(135deg, var(--primary), #1e3a8a);
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.chat-header h3, .chat-header h4, .chat-header p, .chat-header span {
+  color: #ffffff !important;
 }
 
 .chat-messages {
@@ -324,6 +330,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
+  background: #f8fafc;
 }
 
 .message-bubble {
@@ -339,26 +346,29 @@ body {
 .message-bubble.user {
   align-self: flex-end;
   background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: #fff;
+  color: #ffffff;
   border-bottom-right-radius: 4px;
+  box-shadow: 0 4px 12px var(--primary-glow);
 }
 
 .message-bubble.assistant {
   align-self: flex-start;
-  background: rgba(30, 41, 59, 0.9);
-  border: 1px solid var(--border-glass);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   color: var(--text-main);
   border-bottom-left-radius: 4px;
+  box-shadow: 0 2px 8px rgba(15, 82, 186, 0.05);
 }
 
 .source-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  background: rgba(59, 130, 246, 0.15);
-  border: 1px solid rgba(59, 130, 246, 0.3);
-  color: #93c5fd;
+  background: rgba(15, 82, 186, 0.08);
+  border: 1px solid rgba(15, 82, 186, 0.25);
+  color: var(--primary);
   font-size: 0.75rem;
+  font-weight: 600;
   padding: 0.25rem 0.6rem;
   border-radius: 20px;
   margin-top: 0.6rem;
@@ -367,8 +377,8 @@ body {
 
 .chat-input-area {
   padding: 1rem;
-  background: rgba(15, 23, 42, 0.9);
-  border-top: 1px solid var(--border-glass);
+  background: #ffffff;
+  border-top: 1px solid #e2e8f0;
 }
 
 .chat-form {
@@ -378,8 +388,8 @@ body {
 
 .chat-input {
   flex: 1;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-glass);
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
   color: var(--text-main);
   padding: 0.8rem 1.2rem;
   border-radius: var(--radius-md);
@@ -391,7 +401,8 @@ body {
 
 .chat-input:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 12px var(--primary-glow);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(15, 82, 186, 0.15);
 }
 
 .send-btn {
@@ -406,11 +417,12 @@ body {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  box-shadow: 0 4px 12px var(--primary-glow);
 }
 
 .send-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 15px var(--primary-glow);
+  box-shadow: 0 6px 16px var(--primary-glow);
 }
 
 .prompt-chips {
@@ -421,20 +433,21 @@ body {
 }
 
 .chip-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-glass);
-  color: var(--text-muted);
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  color: #475569;
   padding: 0.4rem 0.8rem;
   border-radius: 20px;
   font-size: 0.8rem;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .chip-btn:hover {
-  color: #fff;
+  color: var(--primary);
   border-color: var(--primary);
-  background: rgba(59, 130, 246, 0.15);
+  background: rgba(15, 82, 186, 0.08);
 }
 
 /* College Explorer Grid */
